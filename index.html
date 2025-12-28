@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guía Didáctica de Tokens</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
@@ -24,7 +25,7 @@
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 
-    <!-- Import Map: Updated URLs to ensure availability -->
+    <!-- Import Map -->
     <script type="importmap">
     {
       "imports": {
@@ -32,13 +33,13 @@
         "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
         "recharts": "https://esm.sh/recharts@2.12.3?deps=react@18.2.0,react-dom@18.2.0",
         "lucide-react": "https://esm.sh/lucide-react@0.344.0?deps=react@18.2.0",
-        "@google/genai": "https://esm.sh/@google/genai"
+        "@google/genai": "https://esm.sh/@google/genai@0.1.1"
       }
     }
     </script>
 
     <script>
-      // Polyfill simple para process.env
+      // Polyfill for process.env
       window.process = { env: { API_KEY: '' } };
     </script>
   </head>
@@ -46,7 +47,9 @@
     <div id="root"></div>
 
     <!-- Application Code -->
-    <script type="text/babel" data-type="module" data-presets="env,react">
+    <!-- CRITICAL FIX: data-presets="react" ONLY. 
+         Removing 'env' prevents Babel from converting ES6 imports to CommonJS 'require' calls. -->
+    <script type="text/babel" data-type="module" data-presets="react">
       import React, { useState, useEffect } from 'react';
       import ReactDOM from 'react-dom/client';
       import { 
