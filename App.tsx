@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { STAGES_CONFIG } from './constants';
-import { AppStage } from './types';
-import Stage1Anatomy from './components/Stage1Anatomy';
-import Stage2Inequity from './components/Stage2Inequity';
-import Stage3Asymmetry from './components/Stage3Asymmetry';
+import { STAGES_CONFIG } from './constants.ts';
+import { AppStage } from './types.ts';
+import Stage1Anatomy from './components/Stage1Anatomy.tsx';
+import Stage2Inequity from './components/Stage2Inequity.tsx';
+import Stage3Asymmetry from './components/Stage3Asymmetry.tsx';
 import { BookOpen } from 'lucide-react';
 
 const App: React.FC = () => {

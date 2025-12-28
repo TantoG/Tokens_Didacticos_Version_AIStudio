@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw, Info } from 'lucide-react';
-import { TokenSimulationResult } from '../types';
+import { TokenSimulationResult } from '../types.ts';
 
 // Simulation logic based on the PDF guide descriptions
 const simulateWordTokenizer = (text: string): TokenSimulationResult => {

@@ -1,6 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { TranslationResult } from "../types";
-import { GEMINI_MODEL } from "../constants";
+import { TranslationResult } from "../types.ts";
+import { GEMINI_MODEL } from "../constants.ts";
 
 // Initialize Gemini Client
 // Note: process.env.API_KEY is handled by the environment

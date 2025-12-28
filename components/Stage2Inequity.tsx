@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { ArrowRightLeft, Loader2, Coins } from 'lucide-react';
-import { countTokens, translateForSimulation } from '../services/geminiService';
-import { LanguageCostData } from '../types';
+import { countTokens, translateForSimulation } from '../services/geminiService.ts';
+import { LanguageCostData } from '../types.ts';
 
 const Stage2Inequity: React.FC = () => {
   const [inputText, setInputText] = useState("La inteligencia artificial generativa transforma la creatividad humana.");
