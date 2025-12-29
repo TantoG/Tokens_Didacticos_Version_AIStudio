@@ -62,7 +62,7 @@
       import { 
         BookOpen, Scale, Languages, BarChart3 as ChartColumn, 
         RefreshCw, Info, ArrowRightLeft, Loader2, 
-        Coins, Cpu, Database, Video, Box, Globe 
+        Coins, Cpu, Database, Video, Box, Globe, AlertTriangle
       } from 'lucide-react';
       import { GoogleGenAI, Type } from "@google/genai";
 
@@ -149,6 +149,7 @@
       const Stage2Inequity = () => {
         const [inputText, setInputText] = useState("La inteligencia artificial está transformando el mundo rápidamente.");
         const [loading, setLoading] = useState(false);
+        const [error, setError] = useState(null);
         const [results, setResults] = useState(null);
         const [chartData, setChartData] = useState([
           { lang: 'Inglés', tokens: 7, fill: '#6366f1' },
@@ -159,6 +160,7 @@
         const analyzeText = async () => {
           if (!inputText.trim()) return;
           setLoading(true);
+          setError(null);
           try {
             const response = await ai.models.generateContent({
               model: GEMINI_MODEL,
@@ -210,7 +212,14 @@
             
           } catch (error) {
             console.error("Error generating analysis", error);
-            alert("Error al conectar con Gemini. Verifica tu API Key.");
+            const msg = error.message || error.toString();
+            setError(msg);
+            
+            let helpfulMsg = `Error: ${msg}`;
+            if (msg.includes("403")) {
+              helpfulMsg += "\n\n⚠️ Problema de Permisos (403): Si estás viendo esto en GitHub, es muy probable que tu API Key tenga restricciones de dominio (Referrer) que bloquean 'github.io'. Ajusta esto en Google Cloud Console.";
+            }
+            alert(helpfulMsg);
           } finally {
             setLoading(false);
           }
@@ -240,6 +249,17 @@
                   {loading ? <Loader2 className="animate-spin mr-2"/> : <RefreshCw className="mr-2"/>}
                   {loading ? "Analizando..." : "Analizar y Traducir"}
                 </button>
+
+                {error && (
+                  <div className="mt-3 p-3 bg-red-500/10 border border-red-500/30 rounded text-red-200 text-xs flex items-start">
+                     <AlertTriangle className="w-4 h-4 mr-2 shrink-0" />
+                     <div>
+                       <strong>Error de API:</strong> {error}
+                       <br/>
+                       {error.includes('403') && <span className="block mt-1 opacity-75">Verifica restricciones de dominio en Google Cloud Console.</span>}
+                     </div>
+                  </div>
+                )}
               </div>
 
               {results && (
