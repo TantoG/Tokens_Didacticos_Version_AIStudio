@@ -33,13 +33,13 @@
         "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
         "recharts": "https://esm.sh/recharts@2.12.3?deps=react@18.2.0,react-dom@18.2.0",
         "lucide-react": "https://esm.sh/lucide-react@0.344.0?deps=react@18.2.0",
-        "@google/genai": "https://esm.sh/@google/genai@0.1.1"
+        "@google/genai": "https://esm.sh/@google/genai"
       }
     }
     </script>
 
     <script>
-      // Polyfill for process.env
+      // Polyfill for process.env to prevent crashes in libraries that expect it
       window.process = { env: { API_KEY: '' } };
     </script>
   </head>
@@ -47,8 +47,6 @@
     <div id="root"></div>
 
     <!-- Application Code -->
-    <!-- CRITICAL FIX: data-presets="react" ONLY. 
-         Removing 'env' prevents Babel from converting ES6 imports to CommonJS 'require' calls. -->
     <script type="text/babel" data-type="module" data-presets="react">
       import React, { useState, useEffect } from 'react';
       import ReactDOM from 'react-dom/client';
@@ -56,7 +54,7 @@
         BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell 
       } from 'recharts';
       import { 
-        BookOpen, Scale, Languages, ChartColumn, 
+        BookOpen, Scale, Languages, BarChart3 as ChartColumn, 
         RefreshCw, Info, ArrowRightLeft, Loader2, 
         Coins, Cpu, Database, Video, Box 
       } from 'lucide-react';
